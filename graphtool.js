@@ -1763,9 +1763,6 @@ function iso226(phon, targetFreq) {
   
     // Access parameters from object
     const { f, a_f, L_U, T_f } = iso223_params;
-    console.log(L_U);
-    console.log(T_f);
-    console.log(f);
   
     // Generate desired frequency range (modify if needed)
     const targetFreqRange = f.slice(); // Use existing f array for simplicity
