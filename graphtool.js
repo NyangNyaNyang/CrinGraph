@@ -1762,9 +1762,9 @@ function iso226(phon, targetFreq) {
     const Ln = phon;
   
     // Access parameters from object
-    const { f, af, Lu, Tf } = iso223_params;
-    console.log(Lu);
-    console.log(Tf);
+    const { f, a_f, L_U, T_f } = iso223_params;
+    console.log(L_U);
+    console.log(T_f);
     console.log(f);
   
     // Generate desired frequency range (modify if needed)
@@ -1773,9 +1773,9 @@ function iso226(phon, targetFreq) {
     // Deriving sound pressure level
     const Af = [];
     for (let i = 0; i < f.length; i++) {
-        Af.push(4.47e-3 * (Math.pow(10, 0.025 * Ln) - 1.15) + (0.4 * Math.pow(10, (Tf[i] + Lu[i]) / 10 - 9)));
+        Af.push(4.47e-3 * (Math.pow(10, 0.025 * Ln) - 1.15) + (0.4 * Math.pow(10, (T_f[i] + L_U[i]) / 10 - 9)));
     }
-    const Lp = Af.map((a, i) => 10 / af[i] * Math.log10(a) - Lu[i] + 94);
+    const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
   
     // Filter values for desired frequency range and target frequency
     const targetIndex = targetFreqRange.findIndex(freq => freq === targetFreq);
