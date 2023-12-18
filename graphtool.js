@@ -1768,7 +1768,10 @@ function iso226(phon, targetFreq) {
     const targetFreqRange = f.slice(); // Use existing f array for simplicity
   
     // Deriving sound pressure level
-    const Af = 4.47e-3 * (Math.pow(10, 0.025 * Ln) - 1.15) + (0.4 * [Math.pow(10, (Tf + Lu) / 10 - 9)]).map((v, i) => Math.pow(v, af[i]));
+    const Af = [];
+    for (let i = 0; i < f.length; i++) {
+    Af.push(4.47e-3 * (Math.pow(10, 0.025 * Ln) - 1.15) + (0.4 * Math.pow(10, (Tf[i] + Lu[i]) / 10 - 9)));
+    }
     const Lp = Af.map((a, i) => 10 / af[i] * Math.log10(a) - Lu[i] + 94);
   
     // Filter values for desired frequency range and target frequency
