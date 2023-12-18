@@ -1840,6 +1840,7 @@ function loudness_equalizer(p, phon) {
         showPhone(p, true);
     }
     p.loudness = phon;
+    activeElem.focus();
     console.log(p);
 };
 
