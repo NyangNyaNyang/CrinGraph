@@ -1614,18 +1614,30 @@ function showPhone(p, exclusive, suppressVariant, trigger) {
         if (baseline.p && !baseline.p.active) setBaseline(baseline0, 1);
     }
     if (activePhones.indexOf(p) === -1 && (suppressVariant || !p.objs)) {
+        // avg : ? 
         let avg = false;
         if (!p.isTarget) {
+            // ap : activePhones isTarget이 아닌 친구들
             let ap = activePhones.filter(p => !p.isTarget);
+            // avg : activePhones에서 isTarget이 아닌 것이 존재한다.
             avg = ap.length >= 1;
+            // 존재하면서 length가 1이 아니면 setCurve 호출 (parameter는 몰?루)
             if (ap.length === 1 && ap[0].activeCurves.length !== 1) {
                 setCurves(ap[0], true);
             }
+            // activePhones에 p를 추가 (why? 존재하지 않았을 때니까)
             activePhones.push(p);
         } else {
+            // 일단 p가 isTarget이면
+            // 맨 앞에 p를 추가
             activePhones.unshift(p);
         }
+        // p.active는 True이다. 왜?
         p.active = true;
+        // setCurve p, avg 호출하는데 
+        // no 1 avg = false -> p.isTarget = true
+        // no.2  p.isTarget = false >> activePhones에서 isTarget이 아닌 것들이 존재하면 true
+        //                                                                    아니면 false
         setCurves(p, avg);
     }
     updatePaths(trigger);
