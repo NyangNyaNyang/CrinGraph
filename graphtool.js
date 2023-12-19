@@ -1782,7 +1782,7 @@ function iso226(phon, targetFreq) {
     // Deriving sound pressure level
     const Af = [];
     for (let i = 0; i < f.length; i++) {
-        Af.push(4.47e-3 * (Math.pow(10, 0.025 * Ln) - 1.15) + (0.4 * Math.pow(10, (T_f[i] + L_U[i]) / 10 - 9)));
+        Af.push(4.47 * Math.pow(10, -3) * (Math.pow(10, 0.025 * Ln) - 1.15) + Math.pow((0.4 * Math.pow(10, (T_f[i] + L_U[i]) / 10 - 9))), a_f[i]);
     }
     console.log(Af);
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
@@ -1841,7 +1841,6 @@ function loudness_equalizer(p, phon) {
         boolType = true;
     }
     p.loudness = phon;
-    con
     removePhone(p);
     showPhone(p, boolType);
     activeElem.focus();
