@@ -1793,8 +1793,11 @@ function iso226(phon, targetFreq) {
       const [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
-      return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
+      let returnValue = interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
+      console.log(returnValue);
+      return returnValue;
     } else {
+      console.log(Lp[targetIndex]);
       return Lp[targetIndex];
     }
   }
@@ -1839,6 +1842,7 @@ function loudness_equalizer(p, phon) {
         boolType = true;
     }
     p.loudness = phon;
+    con
     removePhone(p);
     showPhone(p, boolType);
     activeElem.focus();
