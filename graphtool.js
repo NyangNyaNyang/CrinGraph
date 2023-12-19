@@ -1778,15 +1778,12 @@ function iso226(phon, targetFreq) {
   
     // Generate desired frequency range (modify if needed)
     const targetFreqRange = f.slice(); // Use existing f array for simplicity
-    console.log(targetFreqRange);
     // Deriving sound pressure level
     const Af = [];
     for (let i = 0; i < f.length; i++) {
         Af.push(4.47 * Math.pow(10, -3) * (Math.pow(10, 0.025 * Ln) - 1.15) + Math.pow((0.4 * Math.pow(10, (T_f[i] + L_U[i]) / 10 - 9)), a_f[i]));
     }
-    console.log(Af);
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
-    console.log(Lp);
     // Filter values for desired frequency range and target frequency
     const targetIndex = targetFreqRange.findIndex(freq => freq === targetFreq);
     if (targetIndex === -1) {
@@ -1794,9 +1791,10 @@ function iso226(phon, targetFreq) {
       const [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
-
+        console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
     } else {
+        console.log(Lp[targetIndex]);
       return Lp[targetIndex];
     }
   }
