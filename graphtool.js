@@ -1786,9 +1786,7 @@ function iso226(phon, targetFreq) {
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
     // Filter values for desired frequency range and target frequency
     const targetIndex = targetFreqRange.findIndex(freq => freq == targetFreq);
-    if (targetIndex === -1) {
-      // Perform interpolation if target frequency not found exactly
-      var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
+    var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       if(upperFreq  == undefined) {
         lowerFreq = targetFreqRange[targetFreqRange.length - 2];
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
@@ -1797,11 +1795,6 @@ function iso226(phon, targetFreq) {
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
       console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
-    } else {
-        // console.log(Lp[targetIndex]);
-        console.log(Lp[targetIndex]);
-      return Lp[targetIndex];
-    }
   }
   
   // Helper functions for interpolation (if needed)
@@ -1833,14 +1826,14 @@ function loudness_equalizer(p, phon) {
     if(!p.isTarget) {
         for(let i=0;i<p.rawChannels.length;i++) {
             for(let j=0;j<p.rawChannels[i].length;j++) {
-                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
+                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
             }
             console.log("done");
         }
     }
     else {
         for(let j=0;j<p.rawChannels[i].length;j++) {
-            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
+            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
         }
         boolType = true;
     }
