@@ -1791,7 +1791,8 @@ function iso226(phon, targetFreq) {
       const [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
-        console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
+      console.log(lowerLp);
+      console.log(upperLp);
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
     } else {
         // console.log(Lp[targetIndex]);
