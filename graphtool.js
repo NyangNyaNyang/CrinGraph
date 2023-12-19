@@ -1824,25 +1824,23 @@ function loudness_equalizer(p, phon) {
     if(phon == p.loudness) return;
 
     let activeElem = document.activeElement;
-    
+    let boolType = false;
     if(!p.isTarget) {
         for(let i=0;i<p.rawChannels.length;i++) {
             p.rawChannels[i].map((point) => [point[0], point[1] + iso226(phon, point[0]) - iso226(p.loudness, point[0])]);
             console.log("done");
         }
-        removePhone(p);
-        showPhone(p, false);
     }
     else {
         for(let i=0;i<p.rawChannels.length;i++) {
             p.rawChannels[i].map((point) => [point[0], point[1] - iso226(phon, point[0]) + iso226(p.loudness, point[0])]);
             console.log("done");
         }
-        removePhone(p);
-        showPhone(p, true);
+        boolType = true;
     }
     p.loudness = phon;
-
+    removePhone(p);
+    showPhone(p, boolType);
     console.log(p);
 };
 
