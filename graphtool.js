@@ -1785,9 +1785,12 @@ function iso226(phon, targetFreq) {
     }
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
     // Filter values for desired frequency range and target frequency
-    const targetIndex = targetFreqRange.findIndex(freq => freq == targetFreq);
     var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
-      if(upperFreq  == undefined) {
+      if (lowerFreq == undefined) {
+        lowerFreq = targetFreqRange[0];
+        upperFreq = targetFreqRange[1];
+      }
+      else if(upperFreq  == undefined) {
         lowerFreq = targetFreqRange[targetFreqRange.length - 2];
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
       }
