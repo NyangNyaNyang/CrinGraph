@@ -1785,27 +1785,19 @@ function iso226(phon, targetFreq) {
     }
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
     // Filter values for desired frequency range and target frequency
-    var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
-      if (lowerFreq == undefined) {
-        lowerFreq = targetFreqRange[0];
-        upperFreq = targetFreqRange[1];
-      }
-      else if(upperFreq  == undefined) {
+    var upperFreq = f.find(freq => freq > targetFreq);
+
+      if(upperFreq  == undefined) {
         lowerFreq = targetFreqRange[targetFreqRange.length - 2];
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
       }
+      else lowerFreq = targetFreqRange[targetFreqRange.indexOf(upperFreq) - 1];
       console.log(lowerFreq);
       console.log(upperFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
       //console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
-  }
-  
-  // Helper functions for interpolation (if needed)
-  function getAdjacentFrequencies(f, targetFreq) {
-    // Find closest lower and upper frequencies
-    return [f.find(freq => freq <= targetFreq), f.find(freq => freq >= targetFreq)];
   }
   
   function interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq) {
