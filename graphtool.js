@@ -1788,7 +1788,7 @@ function iso226(phon, targetFreq) {
     const targetIndex = targetFreqRange.findIndex(freq => freq == targetFreq);
     if (targetIndex === -1) {
       // Perform interpolation if target frequency not found exactly
-      const [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
+      var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       if(upperFreq  == undefined) {
         lowerFreq--;
         upperFreq = targetFreqRange.length - 1;
@@ -1832,17 +1832,13 @@ function loudness_equalizer(p, phon) {
     let boolType = false;
     if(!p.isTarget) {
         for(let i=0;i<p.rawChannels.length;i++) {
-            for(let j=0;j<p.rawChannels[i].length;j++) {
-                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
-            }
+            p.rawChannels[i].map((point) => [point[0], point[1] + iso226(phon, point[0]) - iso226(p.loudness, point[0])]);
             console.log("done");
         }
     }
     else {
         for(let i=0;i<p.rawChannels.length;i++) {
-            for(let j=0;j<p.rawChannels[i].length;j++) {
-                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
-            }
+            p.rawChannels[i].map((point) => [point[0], point[1] - iso226(phon, point[0]) + iso226(p.loudness, point[0])]);
             console.log("done");
         }
         boolType = true;
