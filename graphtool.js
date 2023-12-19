@@ -1794,9 +1794,11 @@ function iso226(phon, targetFreq) {
         lowerFreq = targetFreqRange[targetFreqRange.length - 2];
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
       }
+      console.log(lowerFreq);
+      console.log(upperFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
-      console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
+      //console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
   }
   
