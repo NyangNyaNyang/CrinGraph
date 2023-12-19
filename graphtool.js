@@ -1832,19 +1832,17 @@ function loudness_equalizer(p, phon) {
     let boolType = false;
     if(!p.isTarget) {
         for(let i=0;i<p.rawChannels.length;i++) {
-            const mappedPoints = p.rawChannels[i].map((point) => {
-                return [point[0], point[1] + iso226(phon, point[0]) - iso226(p.loudness, point[0])];
-              });
-              p.rawChannels[i] = mappedPoints;
+            for(let j=0;j<p.rawChannels[i].length;j++) {
+                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
+            }
             console.log("done");
         }
     }
     else {
         for(let i=0;i<p.rawChannels.length;i++) {
-            const mappedPoints = p.rawChannels[i].map((point) => {
-                return [point[0], point[1] + iso226(phon, point[0]) - iso226(p.loudness, point[0])];
-              });
-              p.rawChannels[i] = mappedPoints;
+            for(let j=0;j<p.rawChannels[i].length;j++) {
+                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
+            }
             console.log("done");
         }
         boolType = true;
