@@ -1830,6 +1830,7 @@ function loudness_equalizer(p, phon) {
             p.rawChannels[i].map((point) => [point[0], point[1] + iso226(phon, point[0]) - iso226(p.loudness, point[0])]);
             console.log("done");
         }
+        removePhone(p);
         showPhone(p, false);
     }
     else {
@@ -1837,6 +1838,7 @@ function loudness_equalizer(p, phon) {
             p.rawChannels[i].map((point) => [point[0], point[1] - iso226(phon, point[0]) + iso226(p.loudness, point[0])]);
             console.log("done");
         }
+        removePhone(p);
         showPhone(p, true);
     }
     p.loudness = phon;
