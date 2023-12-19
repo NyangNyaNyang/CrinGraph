@@ -1785,7 +1785,7 @@ function iso226(phon, targetFreq) {
     }
     const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
     // Filter values for desired frequency range and target frequency
-    const targetIndex = targetFreqRange.findIndex(freq => freq === targetFreq);
+    const targetIndex = targetFreqRange.findIndex(freq => freq == targetFreq);
     if (targetIndex === -1) {
       // Perform interpolation if target frequency not found exactly
       const [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
@@ -1794,7 +1794,7 @@ function iso226(phon, targetFreq) {
         console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
       return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
     } else {
-        console.log(Lp[targetIndex]);
+        // console.log(Lp[targetIndex]);
       return Lp[targetIndex];
     }
   }
