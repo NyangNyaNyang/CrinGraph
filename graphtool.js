@@ -1790,7 +1790,7 @@ function iso226(phon, targetFreq) {
       // Perform interpolation if target frequency not found exactly
       var [lowerFreq, upperFreq] = getAdjacentFrequencies(targetFreqRange, targetFreq);
       if(upperFreq  == undefined) {
-        lowerFreq--;
+        upperFreq = targetFreqRange.length - 2;
         upperFreq = targetFreqRange.length - 1;
       }
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
