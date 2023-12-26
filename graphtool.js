@@ -1792,8 +1792,6 @@ function iso226(phon, targetFreq) {
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
       }
       else lowerFreq = targetFreqRange[targetFreqRange.indexOf(upperFreq) - 1];
-      console.log(lowerFreq);
-      console.log(upperFreq);
       const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
       const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
       //console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
@@ -1825,7 +1823,6 @@ function loudness_equalizer(p, phon) {
             for(let j=0;j<p.rawChannels[i].length;j++) {
                 p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
             }
-            console.log("done");
         }
     }
     else {
