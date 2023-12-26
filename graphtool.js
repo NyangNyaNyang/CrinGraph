@@ -1829,8 +1829,10 @@ function loudness_equalizer(p, phon) {
         }
     }
     else {
-        for(let j=0;j<p.rawChannels[i].length;j++) {
-            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
+        for(let i=0;i<p.rawChannels.length;i++) {
+            for(let j=0;j<p.rawChannels[i].length;j++) {
+                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
+            }
         }
         boolType = true;
     }
