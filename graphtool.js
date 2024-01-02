@@ -1782,7 +1782,7 @@ function iso226(phon, targetFreq) {
     let Lp = []
 
     for(let i = 0; i < f.length; i++) {
-        Lp.append(10 / a_f[i] * math.log10(math.pow(4*math.pow(10, -10), 0.3 - a_f[i]) * (math.pow(10, 0.03 * Ln) - math.pow(10, 0.072)) + math.pow(10, a_f[i] * (T_f[i] + L_U[i]) / 10)) - L_U[i]);
+        Lp.append(10 / a_f[i] * Math.log10(Math.pow(4*Math.pow(10, -10), 0.3 - a_f[i]) * (Math.pow(10, 0.03 * Ln) - Math.pow(10, 0.072)) + Math.pow(10, a_f[i] * (T_f[i] + L_U[i]) / 10)) - L_U[i]);
     }
     // Filter values for desired frequency range and target frequency
     var upperFreq = f.find(freq => freq > targetFreq);
