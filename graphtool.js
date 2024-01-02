@@ -1779,46 +1779,29 @@ function iso226(phon, targetFreq) {
     const L_U = [-31.5, -27.2, -23.1, -19.3, -16.1, -13.1, -10.4, -8.2, -6.3, -4.6, -3.2, -2.1, -1.2, -0.5, 0, 0.4, 0.5, 0, -2.7, -4.2, -1.2, 1.4, 2.3, 1.0, -2.3, -7.2, -11.2, -10.9, -3.5, -31.5];
     const T_f = [78.1, 68.7, 59.5, 51.1, 44, 37.5, 31.5, 26.5, 22.1, 17.9, 14.4, 11.4, 8.6, 6.2, 4.4, 3, 2.2, 2.4, 3.5, 1.7, -1.3, -4.2, -6, -5.4, -1.5, 6, 12.6, 13.9, 12.3, 78.1];
   
-    // Generate desired frequency range (modify if needed)
-    const targetFreqRange = f.slice(); // Use existing f array for simplicity
-    // Deriving sound pressure level
-    const Af = [];
-    for (let i = 0; i < f.length; i++) {
-        Af.push(4.47 * Math.pow(10, -3) * (Math.pow(10, 0.025 * Ln) - 1.15) + Math.pow((0.4 * Math.pow(10, (T_f[i] + L_U[i]) / 10 - 9)), a_f[i]));
+    for(let i = 0; i < f.length; i++) {
+        Lp.append(10 / a_f[i] * math.log10(math.pow(4*math.pow(10, -10), 0.3 - a_f[i]) * (math.pow(10, 0.03 * Ln) - math.pow(10, 0.072)) + math.pow(10, a_f[i] * (T_f[i] + L_U[i]) / 10)) - L_U[i]);
     }
-    const Lp = Af.map((a, i) => 10 / a_f[i] * Math.log10(a) - L_U[i] + 94);
     // Filter values for desired frequency range and target frequency
     var upperFreq = f.find(freq => freq > targetFreq);
 
       if(upperFreq  == undefined) {
-        lowerFreq = targetFreqRange[targetFreqRange.length - 2];
-        upperFreq = targetFreqRange[targetFreqRange.length - 1];
+        lowerFreq = f[f.length - 2];
+        upperFreq = f[f.length - 1];
       }
-      else lowerFreq = targetFreqRange[targetFreqRange.indexOf(upperFreq) - 1];
-      const lowerIndex = targetFreqRange.indexOf(lowerFreq);
-      const upperIndex = targetFreqRange.indexOf(upperFreq);
+      else lowerFreq = f[f.indexOf(upperFreq) - 1];
+      const lowerIdx = f.indexOf(lowerFreq);
+      const upperIdx = f.indexOf(upperFreq);
 
-      const lowerLp = Lp[lowerIndex];
-      const upperLp = Lp[upperIndex];
-
-      if(lowerIndex == 0) {
-        return interpolateQuadratic(targetFreq, lowerFreq, lowerLp, upperFreq, upperLp, targetFreqRange[2], Lp[2]);
+      if(lowerIdx == 0) {
+        return interpolateCubic(targetFreq, f[lowerIdx], Lp[lowerIdx], f[upperIdx], Lp[upperIdx], f[upperIdx + 1], Lp[upperIdx + 1], f[upperIdx + 2], Lp[upperIdx + 2]);
+      }
+      else if (upperIdx == f.length - 1) {
+        return interpolateCubic(targetFreq, f[lowerIdx - 2], Lp[lowerIdx - 2], f[lowerIdx - 1], Lp[lowerIdx - 1], f[lowerIdx], Lp[lowerIdx], f[upperIdx], Lp[upperIdx]);
       }
       else {
-        return interpolateQuadratic(targetFreq, targetFreqRange[upperIndex - 2], Lp[upperIndex - 2], lowerFreq, lowerLp, upperFreq, upperLp);
+        return interpolateCubic(targetFreq, f[lowerIdx - 1], Lp[lowerIdx - 1], f[lowerIdx], Lp[lowerIdx], f[upperIdx], Lp[upperIdx], f[upperIdx + 1], Lp[upperIdx + 1]);
       }
-      /*
-      else {
-        const lower2Index = lowerIndex - 1;
-        const upper2Index = upperIndex + 1;
-        const lower2Freq = targetFreqRange[lower2Index];
-        const lower2Lp = Lp[lower2Index];
-        const upper2Freq = targetFreqRange[upper2Index];
-        const upper2Lp = Lp[upper2Index];
-
-        return interpolateCubic(targetFreq, lower2Freq, lower2Lp, lowerFreq, lowerLp, upperFreq, upperLp, upper2Freq, upper2Lp);
-      }
-      */
   }
 
   function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
