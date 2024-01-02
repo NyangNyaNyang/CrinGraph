@@ -1804,9 +1804,10 @@ function iso226(phon, targetFreq) {
       if(lowerIndex == 0) {
         return interpolateQuadratic(targetFreq, lowerFreq, lowerLp, upperFreq, upperLp, targetFreqRange[2], Lp[2]);
       }
-      else if(upperIndex == targetFreqRange.length - 1) {
+      else {
         return interpolateQuadratic(targetFreq, targetFreqRange[upperIndex - 2], Lp[upperIndex - 2], lowerFreq, lowerLp, upperFreq, upperLp);
       }
+      /*
       else {
         const lower2Index = lowerIndex - 1;
         const upper2Index = upperIndex + 1;
@@ -1817,6 +1818,7 @@ function iso226(phon, targetFreq) {
 
         return interpolateCubic(targetFreq, lower2Freq, lower2Lp, lowerFreq, lowerLp, upperFreq, upperLp, upper2Freq, upper2Lp);
       }
+      */
   }
 
   function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
