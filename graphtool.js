@@ -1774,7 +1774,10 @@ function iso226(phon, targetFreq) {
     const Ln = phon;
   
     // Access parameters from object
-    const { f, a_f, L_U, T_f } = iso223_params;
+    const f = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 20000];
+    const a_f = [0.635, 0.602, 0.569, 0.537, 0.509, 0.482, 0.456, 0.433, 0.412, 0.391, 0.373, 0.357, 0.343, 0.330, 0.320, 0.311, 0.303, 0.300, 0.295, 0.292, 0.290, 0.290, 0.289, 0.289, 0.289, 0.293, 0.303, 0.323, 0.354, 0.635];
+    const L_U = [-31.5, -27.2, -23.1, -19.3, -16.1, -13.1, -10.4, -8.2, -6.3, -4.6, -3.2, -2.1, -1.2, -0.5, 0, 0.4, 0.5, 0, -2.7, -4.2, -1.2, 1.4, 2.3, 1.0, -2.3, -7.2, -11.2, -10.9, -3.5, -31.5];
+    const T_f = [78.1, 68.7, 59.5, 51.1, 44, 37.5, 31.5, 26.5, 22.1, 17.9, 14.4, 11.4, 8.6, 6.2, 4.4, 3, 2.2, 2.4, 3.5, 1.7, -1.3, -4.2, -6, -5.4, -1.5, 6, 12.6, 13.9, 12.3, 78.1];
   
     // Generate desired frequency range (modify if needed)
     const targetFreqRange = f.slice(); // Use existing f array for simplicity
@@ -1792,16 +1795,45 @@ function iso226(phon, targetFreq) {
         upperFreq = targetFreqRange[targetFreqRange.length - 1];
       }
       else lowerFreq = targetFreqRange[targetFreqRange.indexOf(upperFreq) - 1];
-      const lowerLp = Lp[targetFreqRange.indexOf(lowerFreq)];
-      const upperLp = Lp[targetFreqRange.indexOf(upperFreq)];
-      //console.log(interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq));
-      return interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq);
+      const lowerIndex = targetFreqRange.indexOf(lowerFreq);
+      const upperIndex = targetFreqRange.indexOf(upperFreq);
+
+      const lowerLp = Lp[lowerIndex];
+      const upperLp = Lp[upperIndex];
+
+      if(lowerIndex == 0) {
+        return interpolateQuadratic(targetFreq, lowerFreq, lowerLp, upperFreq, upperLp, targetFreqRange[2], Lp[2]);
+      }
+      else if(upperIndex == targetFreqRange.length - 1) {
+        return interpolateQuadratic(targetFreq, targetFreqRange[upperIndex - 2], Lp[upperIndex - 2], lowerFreq, lowerLp, upperFreq, upperLp);
+      }
+      else {
+        const lower2Index = lowerIndex - 1;
+        const upper2Index = upperIndex + 1;
+        const lower2Freq = targetFreqRange[lower2Index];
+        const lower2Lp = Lp[lower2Index];
+        const upper2Freq = targetFreqRange[upper2Index];
+        const upper2Lp = Lp[upper2Index];
+
+        return interpolateCubic(targetFreq, lower2Freq, lower2Lp, lowerFreq, lowerLp, upperFreq, upperLp, upper2Freq, upper2Lp);
+      }
   }
+
+  function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
+    const a = y0;
+    const b = (y1 - y0) / (x1 - x0);
+    const c = ((y2 - y1) / (x2 - x1) - b) / (x2 - x0);
+    const d = (((y3 - y2) / (x3 - x2) - ((y2 - y1) / (x2 - x1))) / (x3 - x1) - c) / (x3 - x0);
+
+    return a + b * (x - x0) + c * (x - x0) * (x - x1) + d * (x - x0) * (x - x1) * (x - x2);
+  }
+
+  function interpolateQuadratic(x, x0, y0, x1, y1, x2, y2) {
+    const a = (y1 * (x2 - x0) - y0 * (x2 - x1) + y2 * (x0 - x1)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
+    const b = (-y1 * (x2 * x2 - x0 * x0) + y0 * (x2 * x2 - x1 * x1) - y2 * (x0 * x0 - x1 * x1)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
+    const c = (y1 * x2 * x2 * (x0 - x1) - y0 * x2 * x2 * (x2 - x1) + y2 * x1 * x1 * (x2 - x0)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
   
-  function interpolateLp(lowerFreq, lowerLp, upperFreq, upperLp, targetFreq) {
-    // Implement linear interpolation based on frequency and Lp values
-    const slope = (upperLp - lowerLp) / (upperFreq - lowerFreq);
-    return lowerLp + slope * (targetFreq - lowerFreq);
+    return a * x * x + b * x + c;
   }
 
 function loudness_equalizer(p, phon) {
