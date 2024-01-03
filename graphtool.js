@@ -1449,6 +1449,7 @@ function updateVariant(p) {
     updatePaths();
 }
 function changeVariant(p, update, trigger) {
+    console.log("changeVariant Triggered");
     if(p.loudness) {
         if(!loudnessChange) {
             loudness_equalizer(p, 85);
