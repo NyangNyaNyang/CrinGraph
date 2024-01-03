@@ -1449,12 +1449,6 @@ function updateVariant(p) {
     updatePaths();
 }
 function changeVariant(p, update, trigger) {
-    console.log("changeVariant Triggered");
-    if(p.loudness) {
-        if(!loudnessChange) {
-            loudness_equalizer(p, 85);
-        }
-    }
     let fn = p.fileName,
         ch = p.vars[fn];
     function set(ch) {
@@ -1466,6 +1460,9 @@ function changeVariant(p, update, trigger) {
     if (ch) {
         set(ch);
     } else {
+        if(p.loudness) {
+            loudness_equalizer(p, 85);
+        }
         loadFiles(p, set);
     }
 }
