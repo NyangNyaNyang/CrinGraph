@@ -1816,6 +1816,7 @@ function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
 }
 
 function loudness_equalizer(p, phon) {
+    console.log(phon);
     if(p.isTarget) return;
 
     if(phon < 30) {
@@ -1838,8 +1839,9 @@ function loudness_equalizer(p, phon) {
     }
 
     p.loudness = phon;
+    removePhone(p);
     loudnessChange = true;
-    updateVariant(p);
+    showPhone(p, false);
     loudnessChange = false;
     activeElem.focus();
 };
