@@ -1591,6 +1591,7 @@ doc.select(".addLock").on("click", function () {
 });
 
 function showPhone(p, exclusive, suppressVariant, trigger) {
+    console.log("showPhone triggered");
     if (p.isTarget && activePhones.indexOf(p) !== -1) {
         removePhone(p);
         return;
