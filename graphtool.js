@@ -1461,7 +1461,7 @@ function changeVariant(p, update, trigger) {
         set(ch);
     } else {
         if(p.loudness) {
-            loudness_equalizer(p, 85);
+            p.loudness = 85;
         }
         loadFiles(p, set);
     }
