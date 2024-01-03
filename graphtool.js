@@ -1263,7 +1263,7 @@ function updatePhoneTable() {
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
         .property("value", p => p.loudness)
-        .on("change input", function(p) {loudness_equalizer(p, this.value)});
+        .on("change", function(p) {loudness_equalizer(p, this.value)});
 }
 
 function addKey(s) {
@@ -1460,9 +1460,8 @@ function changeVariant(p, update, trigger) {
     if (ch) {
         set(ch);
     } else {
-        if(p.loudness) {
-            p.loudness = 85;
-        }
+        loudness_equalizer(p, 85);
+        if(p.loudness) p.loudness = 85;
         loadFiles(p, set);
     }
 }
