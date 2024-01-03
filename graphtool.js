@@ -1263,7 +1263,7 @@ function updatePhoneTable() {
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
         .property("value", p => p.loudness)
-        .on("blur", function(p) {loudness_equalizer(p, this.value)});
+        .on("change input", function(p) {loudness_equalizer(p, this.value)});
 }
 
 function addKey(s) {
