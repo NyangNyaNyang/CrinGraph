@@ -1436,6 +1436,14 @@ function addModel(t) {
                 .transition().style("top", 0 + "em").remove()
                 .end().then(() => n.text(p => p.dispName));
             changeVariant(p, updateVariant);
+            if(!loudnessChange) {
+                if(p.loudness == undefined) p.loudness = 85;
+                else {
+                    let cur_loudness = p.loudness;
+                    p.loudness = 85;
+                    loudness_equalizer(p, cur_loudness);
+                }
+            }
             table.selectAll("tr").classed("highlight", false); // Prevents some glitches
         });
     t.filter(p => p.isTarget).append("span").text(" Target");
@@ -1444,20 +1452,11 @@ function addModel(t) {
 let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function updateVariant(p) {
-    if(!loudnessChange) {
-        if(p.loudness == undefined) p.loudness = 85;
-        else {
-            let cur_loudness = p.loudness;
-            p.loudness = 85;
-            loudness_equalizer(p, cur_loudness);
-        }
-    }
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
     normalizePhone(p);
     updatePaths();
 }
 function changeVariant(p, update, trigger) {
-    console.log("updateVariant Triggered");
     let fn = p.fileName,
         ch = p.vars[fn];
     function set(ch) {
