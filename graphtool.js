@@ -1263,11 +1263,12 @@ function updatePhoneTable() {
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
         .property("value", p => p.loudness)
-        .on("change keypress", function(event, p) {
-            console.log(event);
-            console.log(p);
-            if (event.type === "change" || (event.type === "keypress" && (event.keyCode === 13 || event.key === "Enter"))) {
-                loudness_equalizer(p, this.value);
+        .on("change", function(p) {
+            loudness_equalizer(p, this.value);
+        })
+        .on("keypress", function(event) {
+            if (event.key === "Enter") {
+              loudness_equalizer(p, this.value); // Call the function when Enter is pressed
             }
         });
 }
