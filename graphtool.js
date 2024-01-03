@@ -1263,7 +1263,7 @@ function updatePhoneTable() {
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
         .property("value", p => p.loudness)
-        .on("change input", function(p) {loudness_equalizer(p, this.value)});
+        .on("blur", function(p) {loudness_equalizer(p, this.value)});
 }
 
 function addKey(s) {
@@ -1444,7 +1444,14 @@ function addModel(t) {
 let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function updateVariant(p) {
-    if(!loudnessChange) p.loudness = 85;
+    if(!loudnessChange) {
+        if(p.loudness == undefined) p.loudness = 85;
+        else {
+            let cur_loudness = p.loudness;
+            p.loudness = 85;
+            loudness_equalizer(p, cur_loudness);
+        }
+    }
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
     normalizePhone(p);
     updatePaths();
