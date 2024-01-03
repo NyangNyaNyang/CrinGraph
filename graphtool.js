@@ -1458,6 +1458,7 @@ function updateVariant(p) {
     updatePaths();
 }
 function changeVariant(p, update, trigger) {
+    console.log(p);
     let fn = p.fileName,
         ch = p.vars[fn];
     function set(ch) {
