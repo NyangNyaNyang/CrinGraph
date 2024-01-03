@@ -1373,6 +1373,8 @@ function updateKey(s) {
     );
 }
 
+let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
+
 function addModel(t) {
     let n = t.append("div").attr("class", "phonename").text(p => p.dispName);
     t.filter(p => p.fileNames)
@@ -1448,8 +1450,6 @@ function addModel(t) {
         });
     t.filter(p => p.isTarget).append("span").text(" Target");
 }
-
-let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function updateVariant(p) {
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
