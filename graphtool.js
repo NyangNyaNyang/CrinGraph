@@ -1441,13 +1441,16 @@ function addModel(t) {
     t.filter(p => p.isTarget).append("span").text(" Target");
 }
 
+let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
+
 function updateVariant(p) {
-    console.log("updateVariant Triggered");
+    if(!loudnessChange) p.loudness = 85;
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
     normalizePhone(p);
     updatePaths();
 }
 function changeVariant(p, update, trigger) {
+    console.log("updateVariant Triggered");
     let fn = p.fileName,
         ch = p.vars[fn];
     function set(ch) {
@@ -1580,8 +1583,6 @@ doc.select(".addLock").on("click", function () {
         doc.select(".addPhone").classed("locked", addPhoneLock = true);
     }
 });
-
-let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function showPhone(p, exclusive, suppressVariant, trigger) {
     if (p.isTarget && activePhones.indexOf(p) !== -1) {
