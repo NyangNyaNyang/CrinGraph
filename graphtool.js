@@ -1830,7 +1830,7 @@ function loudness_equalizer(p, phon) {
     p.loudness = phon;
     removePhone(p);
     loudnessChange = true;
-    showPhone(p, boolType);
+    showPhone(p, false);
     loudnessChange = false;
     activeElem.focus();
 };
