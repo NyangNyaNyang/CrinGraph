@@ -1267,6 +1267,7 @@ function updatePhoneTable() {
             loudness_equalizer(p, this.value);
         })
         .on("keypress", function(p) {
+            console.log(this.event);
             if (this.event.key === "Enter") {
               loudness_equalizer(p, this.value); // Call the function when Enter is pressed
             }
