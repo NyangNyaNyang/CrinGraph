@@ -197,7 +197,7 @@ doc.html(`
                 <button class="fr-to-target">EQ To Target</button>
                 <div class="graphic-eq-settings">
                     <span>Graphic EQ Band Settings</span>
-                    <select name="band-setting" id="band-setting" onchange="isCustom()">
+                    <select name="band-setting" id="band-setting">
                         <option value="10-iso" selected>10 band(ISO)</option>
                         <option value="15-iso">15 band(ISO)</option>
                         <option value="31-iso">31 band(ISO)</option>
@@ -1580,6 +1580,8 @@ doc.select(".addLock").on("click", function () {
     }
 });
 
+let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
+
 function showPhone(p, exclusive, suppressVariant, trigger) {
     if (p.isTarget && activePhones.indexOf(p) !== -1) {
         removePhone(p);
@@ -1608,36 +1610,24 @@ function showPhone(p, exclusive, suppressVariant, trigger) {
     smoothPhone(p);
     if (p.id === undefined) { p.id = getPhoneNumber(); }
     normalizePhone(p); p.offset = p.offset || 0;
-    p.loudness = p.loudness || 85;
+    if(!loudnessChange) p.loudness = 85;
     if (exclusive) {
         activePhones = activePhones.filter(q => q.active = keep(q));
         if (baseline.p && !baseline.p.active) setBaseline(baseline0, 1);
     }
     if (activePhones.indexOf(p) === -1 && (suppressVariant || !p.objs)) {
-        // avg : ? 
         let avg = false;
         if (!p.isTarget) {
-            // ap : activePhones isTarget이 아닌 친구들
             let ap = activePhones.filter(p => !p.isTarget);
-            // avg : activePhones에서 isTarget이 아닌 것이 존재한다.
             avg = ap.length >= 1;
-            // 존재하면서 length가 1이 아니면 setCurve 호출 (parameter는 몰?루)
             if (ap.length === 1 && ap[0].activeCurves.length !== 1) {
                 setCurves(ap[0], true);
             }
-            // activePhones에 p를 추가 (why? 존재하지 않았을 때니까)
             activePhones.push(p);
         } else {
-            // 일단 p가 isTarget이면
-            // 맨 앞에 p를 추가
             activePhones.unshift(p);
         }
-        // p.active는 True이다. 왜?
         p.active = true;
-        // setCurve p, avg 호출하는데 
-        // no 1 avg = false -> p.isTarget = true
-        // no.2  p.isTarget = false >> activePhones에서 isTarget이 아닌 것들이 존재하면 true
-        //                                                                    아니면 false
         setCurves(p, avg);
     }
     updatePaths(trigger);
@@ -1806,24 +1796,18 @@ function iso226(phon, targetFreq) {
       }
   }
 
-  function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
+function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
     const a = y0;
     const b = (y1 - y0) / (x1 - x0);
     const c = ((y2 - y1) / (x2 - x1) - b) / (x2 - x0);
     const d = (((y3 - y2) / (x3 - x2) - ((y2 - y1) / (x2 - x1))) / (x3 - x1) - c) / (x3 - x0);
 
     return a + b * (x - x0) + c * (x - x0) * (x - x1) + d * (x - x0) * (x - x1) * (x - x2);
-  }
-
-  function interpolateQuadratic(x, x0, y0, x1, y1, x2, y2) {
-    const a = (y1 * (x2 - x0) - y0 * (x2 - x1) + y2 * (x0 - x1)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
-    const b = (-y1 * (x2 * x2 - x0 * x0) + y0 * (x2 * x2 - x1 * x1) - y2 * (x0 * x0 - x1 * x1)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
-    const c = (y1 * x2 * x2 * (x0 - x1) - y0 * x2 * x2 * (x2 - x1) + y2 * x1 * x1 * (x2 - x0)) / (x2 * x1 * (x2 - x0) + x0 * x2 * (x1 - x2) + x1 * x0 * (x2 - x1));
-  
-    return a * x * x + b * x + c;
-  }
+}
 
 function loudness_equalizer(p, phon) {
+    if(p.isTarget) return;
+
     if(phon < 30) {
         phon = 30;
     }
@@ -1836,27 +1820,19 @@ function loudness_equalizer(p, phon) {
     if(phon == p.loudness) return;
 
     let activeElem = document.activeElement;
-    let boolType = false;
-    if(!p.isTarget) {
-        for(let i=0;i<p.rawChannels.length;i++) {
-            for(let j=0;j<p.rawChannels[i].length;j++) {
-                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
-            }
+
+    for(let i=0;i<p.rawChannels.length;i++) {
+        for(let j=0;j<p.rawChannels[i].length;j++) {
+            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
         }
     }
-    else {
-        for(let i=0;i<p.rawChannels.length;i++) {
-            for(let j=0;j<p.rawChannels[i].length;j++) {
-                p.rawChannels[i][j][1] = p.rawChannels[i][j][1] + iso226(phon, p.rawChannels[i][j][0]) - iso226(p.loudness, p.rawChannels[i][j][0]);
-            }
-        }
-        boolType = true;
-    }
+
     p.loudness = phon;
     removePhone(p);
+    loudnessChange = true;
     showPhone(p, boolType);
+    loudnessChange = false;
     activeElem.focus();
-    console.log(p);
 };
 
 d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
@@ -2918,6 +2894,15 @@ function addExtra() {
         }
         updateFilterElements();
         applyEQ();
+    });
+    //Show custom bands input bar when custom option is selected
+    document.getElementById("band-setting").addEventListener("change", () => {
+        if(document.getElementById("band-setting").value == 'custom') {
+            document.getElementById("custom-bands").style.display = 'block';
+        }
+        else {
+            document.getElementById("custom-bands").style.display = 'none';
+        }
     });
     // Export filters as graphic eq (for wavelet)
     document.querySelector("div.extra-eq button.export-graphic-filters").addEventListener("click", () => {
