@@ -1442,6 +1442,7 @@ function addModel(t) {
 }
 
 function updateVariant(p) {
+    console.log("updateVariant Triggered");
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
     normalizePhone(p);
     updatePaths();
@@ -1583,7 +1584,6 @@ doc.select(".addLock").on("click", function () {
 let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function showPhone(p, exclusive, suppressVariant, trigger) {
-    console.log("showPhone triggered");
     if (p.isTarget && activePhones.indexOf(p) !== -1) {
         removePhone(p);
         return;
