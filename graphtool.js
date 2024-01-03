@@ -1373,8 +1373,6 @@ function updateKey(s) {
     );
 }
 
-let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
-
 function addModel(t) {
     let n = t.append("div").attr("class", "phonename").text(p => p.dispName);
     t.filter(p => p.fileNames)
@@ -1438,14 +1436,6 @@ function addModel(t) {
                 .transition().style("top", 0 + "em").remove()
                 .end().then(() => n.text(p => p.dispName));
             changeVariant(p, updateVariant);
-            if(!loudnessChange) {
-                if(p.loudness == undefined) p.loudness = 85;
-                else {
-                    let cur_loudness = p.loudness;
-                    p.loudness = 85;
-                    loudness_equalizer(p, cur_loudness);
-                }
-            }
             table.selectAll("tr").classed("highlight", false); // Prevents some glitches
         });
     t.filter(p => p.isTarget).append("span").text(" Target");
@@ -1589,6 +1579,8 @@ doc.select(".addLock").on("click", function () {
         doc.select(".addPhone").classed("locked", addPhoneLock = true);
     }
 });
+
+let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
 
 function showPhone(p, exclusive, suppressVariant, trigger) {
     console.log("showPhone triggered");
