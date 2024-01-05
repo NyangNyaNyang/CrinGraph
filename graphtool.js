@@ -1262,7 +1262,7 @@ function updatePhoneTable() {
         });
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
-        .property("value", p => p.loudness)
+        .property("value", p => p.loudness[p.fileName])
         .on("change", function(p) {
             loudness_equalizer(p, this.value);
         })
@@ -1470,8 +1470,7 @@ function changeVariant(p, update, trigger) {
     if (ch) {
         set(ch);
     } else {
-        loudness_equalizer(p, 85);
-        if(p.loudness) p.loudness = 85;
+        p.loudness[fn] = 85;
         loadFiles(p, set);
     }
 }
@@ -1595,7 +1594,6 @@ doc.select(".addLock").on("click", function () {
 });
 
 function showPhone(p, exclusive, suppressVariant, trigger) {
-    console.log("showPhone triggered");
     if (p.isTarget && activePhones.indexOf(p) !== -1) {
         removePhone(p);
         return;
@@ -1623,7 +1621,6 @@ function showPhone(p, exclusive, suppressVariant, trigger) {
     smoothPhone(p);
     if (p.id === undefined) { p.id = getPhoneNumber(); }
     normalizePhone(p); p.offset = p.offset || 0;
-    if(!loudnessChange) p.loudness = 85;
     if (exclusive) {
         activePhones = activePhones.filter(q => q.active = keep(q));
         if (baseline.p && !baseline.p.active) setBaseline(baseline0, 1);
@@ -1708,6 +1705,7 @@ function asPhoneObj(b, p, isInit, inits) {
         } else {
             r.fileNames = f;
             r.vars = {};
+            r.loudness = {};
             let dns = f;
             if (p.suffix) {
                 dns = p.suffix.map(
@@ -1819,7 +1817,7 @@ function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
 }
 
 function loudness_equalizer(p, phon) {
-    console.log(phon);
+    fn = p.fileName;
     if(p.isTarget) return;
 
     if(phon < 30) {
@@ -1828,8 +1826,8 @@ function loudness_equalizer(p, phon) {
     else if(phon > 85) {
         phon = 85;
     }
-    if(!p.loudness) {
-        p.loudness = 85;
+    if(!p.loudness[fn]) {
+        p.loudness[fn] = 85;
     }
     if(phon == p.loudness) return;
 
@@ -1837,11 +1835,11 @@ function loudness_equalizer(p, phon) {
 
     for(let i=0;i<p.rawChannels.length;i++) {
         for(let j=0;j<p.rawChannels[i].length;j++) {
-            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness, p.rawChannels[i][j][0]);
+            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness[fn], p.rawChannels[i][j][0]);
         }
     }
 
-    p.loudness = phon;
+    p.loudness[fn] = phon;
     removePhone(p);
     loudnessChange = true;
     showPhone(p, false);
