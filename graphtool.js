@@ -1844,6 +1844,7 @@ function loudness_equalizer(p, phon) {
     }
 
     p.loudness[fn] = phon;
+    console.log(p.loudness[fn]);
     changeVariant(p, updateVariant);
     activeElem.focus();
 };
