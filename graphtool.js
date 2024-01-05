@@ -1263,9 +1263,10 @@ function updatePhoneTable() {
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
         .property("value", p => p.loudness[p.fileName])
-        .on("change", function(p) {
-            loudness_equalizer(p, this.value);
-        })
+        // .on("change", function(p) {
+        //     loudness_equalizer(p, this.value);
+        // })
+        .on("change", p => loudness_equalizer(p, this.value))
         .on("keyup", function() {
             console.log(this.event);
             console.log(arguments);
