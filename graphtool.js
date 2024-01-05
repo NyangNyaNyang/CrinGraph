@@ -1833,7 +1833,7 @@ function loudness_equalizer(p, phon) {
     if(!p.loudness[fn]) {
         p.loudness[fn] = 85;
     }
-    if(phon == p.loudness) return;
+    //if(phon == p.loudness) return;
 
     let activeElem = document.activeElement;
 
