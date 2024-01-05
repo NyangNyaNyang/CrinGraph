@@ -1653,6 +1653,7 @@ function showPhone(p, exclusive, suppressVariant, trigger) {
         document.activeElement.blur();
     }
     if (extraEnabled && extraEQEnabled) {
+        if(!p.fullName) p.fullName = p.dispBrand + " " + p.fileName;
         updateEQPhoneSelect();
     }
 }
