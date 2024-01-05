@@ -1470,7 +1470,7 @@ function changeVariant(p, update, trigger) {
     if (ch) {
         set(ch);
     } else {
-        console.log("else triggered");
+        if(!p.loudness) p.loudness = {};
         p.loudness[fn] = 85;
         loadFiles(p, set);
     }
