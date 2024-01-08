@@ -59,7 +59,10 @@ doc.html(`
           <span>Smooth:</span>
           <input type="number" inputmode="decimal" id="smooth-level" required min="0" value="5" step="any" onclick="this.focus();this.select()"></input>
         </div>
-
+        <div class="loudness_mulitiplier">
+          <span>Loudness:</span>
+          <input type="number" id="loudness_mult" required min="0.1" step="0.1" value="1" onclick="change_multiplier(this.value)"></input>
+        </div>
         <div class="miscTools">
           <button id="inspector"><span>╞</span> inspect</button>
           <button id="label"><span>▭</span> label</button>
@@ -1442,7 +1445,7 @@ function addModel(t) {
     t.filter(p => p.isTarget).append("span").text(" Target");
 }
 
-let loudnessChange = false; // Whether showPhone is triggered by loudness_equalizer function
+let loudnessChange = 1; // Multiplier of loudness equaliztion
 
 function updateVariant(p) {
     updateKey(table.selectAll("tr").filter(q => q === p).select(".keyLine"));
@@ -1817,6 +1820,10 @@ function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
     return a + b * (x - x0) + c * (x - x0) * (x - x1) + d * (x - x0) * (x - x1) * (x - x2);
 }
 
+function change_multiplier(val) {
+    loudnessChange = val;
+}
+
 function loudness_equalizer(p, phon) {
     console.log("loudness_equalizer triggered");
     console.log(p);
@@ -1839,7 +1846,7 @@ function loudness_equalizer(p, phon) {
     let activeElem = document.activeElement;
     for(let i=0;i<p.rawChannels.length;i++) {
         for(let j=0;j<p.rawChannels[i].length;j++) {
-            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness[fn], p.rawChannels[i][j][0]);
+            p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - (iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness[fn], p.rawChannels[i][j][0])) * loudnessChange;
         }
     }
 
