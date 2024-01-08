@@ -861,6 +861,63 @@ div.smooth:after {
     border-radius: 0 6px 6px 0;
 }
 
+/*loudness*/
+div.loudness_multiplier {
+    order: 3;
+    
+    display: flex;
+    align-items: center;
+    
+    padding-left: 16px;
+    margin-left: 16px;
+    border-left: 1px solid var(--background-color-contrast-more);
+}
+
+div.loudness_multiplier > span {
+    margin-right: 10px;
+
+    color: var(--background-color-contrast-more);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    text-transform: uppercase;
+}
+
+div.loudness_multiplier input {
+    box-sizing: border-box;
+    width: 70px;
+    height: 36px;
+    padding: 10px 0;
+    
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast-more);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    
+    color: var(--font-color-inputs);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+div.loudness_multiplier:after {
+    order: 3;
+    content: '';
+    
+    box-sizing: border-box;
+    display: block;
+    width: 6px;
+    height: 36px;
+    
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast-more);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+}
+
 /* Download, Inspect, Label, Recolor */
 div.miscTools {
     order: 4;
