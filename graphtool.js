@@ -1821,8 +1821,18 @@ function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
 }
 
 function change_multiplier(val) {
-    console.log(activePhones);
+    let temp = [];
+    for(let i=0;i<activePhones.length;i++) {
+        if(activePhones.loudness)
+            temp.push(activePhones[i].loudness[activePhones[i].fileName]);
+        else temp.push(85);
+        loudness_equalizer(activePhones[i], 85);
+    }
     loudnessChange = val;
+
+    for(let i=0;i<activePhones.length;i++) {
+        loudness_equalizer(activePhones[i], temp[i]);
+    }
 }
 
 function loudness_equalizer(p, phon) {
