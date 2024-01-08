@@ -1474,7 +1474,7 @@ function changeVariant(p, update, trigger) {
         console.log("changeVariant else triggered");
         if(!p.loudness) p.loudness = {};
         loadFiles(p, set);
-        p.vars[fn] = p.rawChannels;
+        if(p.copyOf) p.vars[fn] = p.rawChannels;
     }
 }
 function showVariant(p, c, trigger) {
