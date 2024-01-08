@@ -1018,11 +1018,13 @@ function setPhoneTr(phtr) {
         let o = p.objs; if (!o) return;
         p.objs = o = o.filter(q => q.active);
         if (o.length === 0) {
+            console.log("setPhone Tr if");
             for(let i=0;i<p.objs.length;i++) {
                 loudness_equalizer(p.objs[i], 85);
             }
             delete p.objs;
         } else if (!p.active) {
+            console.log("setPhone Tr else if");
             p.id = o[0].id;
             p.highlight = true;
         }
