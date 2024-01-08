@@ -196,6 +196,7 @@ input[type=number] { width:2.3em; border:1px solid #899174; height:1.5em; }
     #expandTools { display:inline-block; position:absolute; right:1em; top:0.2em; }
     .tools.collapseTools .normalize,
     .tools.collapseTools .smooth,
+    .tools.collapseTools .loudness_multiplier,
     .tools.collapseTools .miscTools button:not(#download) { display:none; }
     @media screen and (max-width:40em) {
         .tools.collapseTools .zoom { display:none; }
