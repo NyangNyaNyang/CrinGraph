@@ -1822,6 +1822,7 @@ function loudness_equalizer(p, phon) {
     fn = p.fileName;
     if(p.isTarget) return;
 
+    if(!p.loudness) p.loudness = {};
     if(phon < 30) {
         phon = 30;
     }
