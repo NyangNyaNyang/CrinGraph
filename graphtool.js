@@ -1823,10 +1823,10 @@ function interpolateCubic(x, x0, y0, x1, y1, x2, y2, x3, y3) {
 function change_multiplier(val) {
     let temp = [];
     for(let i=0;i<activePhones.length;i++) {
-        if(activePhones[i].isTarget) continue;
         if(activePhones[i].loudness)
             temp.push(activePhones[i].loudness[activePhones[i].fileName]);
         else temp.push(85);
+        if(activePhones[i].isTarget) continue;
         loudness_equalizer(activePhones[i], 85);
     }
     loudnessChange = val;
