@@ -1262,17 +1262,9 @@ function updatePhoneTable() {
         });
     td().attr("class", "loudness").append("input")
         .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
-        .property("value", p => p.loudness[p.fileName])
         .on("change", function(p) {
             loudness_equalizer(p, this.value);
         })
-        .on("keyup", function() {
-            console.log(this.event);
-            console.log(arguments);
-            if (this.event.key === "Enter") {
-              loudness_equalizer(p, this.value); // Call the function when Enter is pressed
-            }
-        });
 }
 
 function addKey(s) {
@@ -1847,18 +1839,7 @@ function loudness_equalizer(p, phon) {
             p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness[fn], p.rawChannels[i][j][0]);
         }
     }
-    if(p.copyOf) {
-        let par = p.copyOf;
-        let cur_idx = 0;
-        for(;cur_idx < par.objs.length;cur_idx++) {
-            if(par.objs[cur_idx].fileName == fn) break;
-        }
-        for(let i=0;i<par.objs[cur_idx].rawChannels.length;i++) {
-            for(let j=0;j<par.objs[cur_idx].rawChannels[i].length;j++) {
-                par.objs[cur_idx].rawChannels[i][j][1] = par.objs[cur_idx].rawChannels[i][j][1] - iso226(phon, par.objs[cur_idx].rawChannels[i][j][0]) + iso226(p.loudness[fn], par.objs[cur_idx].rawChannels[i][j][0]);
-            }
-        }
-    }
+
     p.loudness[fn] = phon;
     console.log(p.loudness[fn]);
     console.log(p);
