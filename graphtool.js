@@ -1462,6 +1462,7 @@ function changeVariant(p, update, trigger) {
     let fn = p.fileName,
         ch = p.vars[fn];
     function set(ch) {
+        console.log("function set triggered");
         p.rawChannels = ch; p.smooth = undefined;
         smoothPhone(p);
         setCurves(p);
