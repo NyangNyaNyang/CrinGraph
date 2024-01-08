@@ -59,7 +59,7 @@ doc.html(`
           <span>Smooth:</span>
           <input type="number" inputmode="decimal" id="smooth-level" required min="0" value="5" step="any" onclick="this.focus();this.select()"></input>
         </div>
-        <div class="loudness_mulitiplier">
+        <div class="loudness_multiplier">
           <span>Loudness:</span>
           <input type="number" id="loudness_mult" required min="0.1" step="0.1" value="1" onchange="change_multiplier(this.value)"></input>
         </div>
