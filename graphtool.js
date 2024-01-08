@@ -1707,6 +1707,7 @@ function asPhoneObj(b, p, isInit, inits) {
             r.fileName = f;
             if (isInit(f)) inits.push(r);
         } else {
+            console.log("asPhoneObj else triggered");
             r.fileNames = f;
             r.vars = {};
             r.loudness = {};
