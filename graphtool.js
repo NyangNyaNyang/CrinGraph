@@ -1839,13 +1839,20 @@ function loudness_equalizer(p, phon) {
     //if(phon == p.loudness) return;
 
     let activeElem = document.activeElement;
-
     for(let i=0;i<p.rawChannels.length;i++) {
         for(let j=0;j<p.rawChannels[i].length;j++) {
             p.rawChannels[i][j][1] = p.rawChannels[i][j][1] - iso226(phon, p.rawChannels[i][j][0]) + iso226(p.loudness[fn], p.rawChannels[i][j][0]);
         }
     }
+    if(p.copyOf) {
+        let par = p.copyOf;
+        let cur_idx = 0;
+        for(;cur_idx < par.objs.length;cur_idx++) {
+            if(par.objs[cur_idx].fileName == fn) break;
+        }
 
+        par.objs[cur_idx].rawChannels = p.rawChannels;
+    }
     p.loudness[fn] = phon;
     console.log(p.loudness[fn]);
     console.log(p);
