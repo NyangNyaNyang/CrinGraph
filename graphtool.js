@@ -1610,6 +1610,7 @@ function showPhone(p, exclusive, suppressVariant, trigger) {
         : (q => q.copyOf === p || q.pin || q.isTarget !== p.isTarget);
     if (cantCompare(activePhones.filter(keep), 0, p)) return;
     if (!p.rawChannels) {
+        console.log("showPhone loadFiles triggered");
         loadFiles(p, function (ch) {
             if (p.rawChannels) return;
             p.rawChannels = ch;
