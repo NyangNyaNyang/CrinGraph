@@ -1665,6 +1665,7 @@ function removeCopies(p) {
 }
 
 function removePhone(p) {
+    console.log("removePhone triggered");
     p.active = p.pin = false; nextPN = null;
     loudness_equalizer(p, 85);
     activePhones = activePhones.filter(q => q.active);
