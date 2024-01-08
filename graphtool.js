@@ -1471,6 +1471,7 @@ function changeVariant(p, update, trigger) {
     if (ch) {
         set(ch);
     } else {
+        console.log("changeVariant else triggered");
         if(!p.loudness) p.loudness = {};
         p.loudness[fn] = 85;
         loadFiles(p, set);
@@ -1481,8 +1482,6 @@ function showVariant(p, c, trigger) {
     if (!p.objs) { p.objs = [p]; }
     p.objs.push(c);
     c.active = true; c.copyOf = p;
-    c.loudness = {};
-    c.loudness[c.fileName] = 85;
     ["brand", "dispBrand", "fileNames", "vars"].map(k => c[k] = p[k]);
     changeVariant(c, showPhone, trigger);
 }
