@@ -1829,7 +1829,7 @@ function change_multiplier(val) {
         loudness_equalizer(activePhones[i], 85);
     }
     loudnessChange = val;
-
+    console.log(temp);
     for(let i=0;i<activePhones.length;i++) {
         loudness_equalizer(activePhones[i], temp[i]);
     }
