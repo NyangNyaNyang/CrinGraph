@@ -61,7 +61,7 @@ doc.html(`
         </div>
         <div class="loudness_mulitiplier">
           <span>Loudness:</span>
-          <input type="number" id="loudness_mult" required min="0.1" step="0.1" value="1" onclick="change_multiplier(this.value)"></input>
+          <input type="number" id="loudness_mult" required min="0.1" step="0.1" value="1" onchange="change_multiplier(this.value)"></input>
         </div>
         <div class="miscTools">
           <button id="inspector"><span>╞</span> inspect</button>
