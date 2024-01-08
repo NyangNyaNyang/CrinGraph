@@ -1472,7 +1472,10 @@ function changeVariant(p, update, trigger) {
         set(ch);
     } else {
         console.log("changeVariant else triggered");
-        if(!p.loudness) p.loudness = {};
+        if(!p.loudness) {
+            console.log("no p.loudness");
+            p.loudness = {};
+        }
         loadFiles(p, set);
     }
 }
