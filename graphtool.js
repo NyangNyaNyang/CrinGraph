@@ -1843,6 +1843,7 @@ function loudness_equalizer(p, phon) {
     console.log(phon);
     fn = p.fileName;
     if(p.isTarget) return;
+    if(!p.vars) p.vars = {};
     if(!p.vars[fn]) p.vars[fn] = p.rawChannels;
     if(!p.loudness) p.loudness = {};
     if(phon < 30) {
