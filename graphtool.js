@@ -1850,8 +1850,10 @@ function loudness_equalizer(p, phon) {
         for(;cur_idx < par.objs.length;cur_idx++) {
             if(par.objs[cur_idx].fileName == fn) break;
         }
-        for(let j=0;j<par.objs[cur_idx].rawChannels[i].length;j++) {
-            par.objs[cur_idx].rawChannels[i][j][1] = par.objs[cur_idx].rawChannels[i][j][1] - iso226(phon, par.objs[cur_idx].rawChannels[i][j][0]) + iso226(p.loudness[fn], par.objs[cur_idx].rawChannels[i][j][0]);
+        for(let i=0;i<par.objs[cur_idx].rawChannels.length;i++) {
+            for(let j=0;j<par.objs[cur_idx].rawChannels[i].length;j++) {
+                par.objs[cur_idx].rawChannels[i][j][1] = par.objs[cur_idx].rawChannels[i][j][1] - iso226(phon, par.objs[cur_idx].rawChannels[i][j][0]) + iso226(p.loudness[fn], par.objs[cur_idx].rawChannels[i][j][0]);
+            }
         }
     }
     p.loudness[fn] = phon;
