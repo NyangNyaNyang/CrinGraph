@@ -177,12 +177,15 @@ doc.html(`
                 <span>AutoEQ Range</span>
                 <span><input name="autoeq-from" type="number" min="20" max="20000" step="1" value="20"></input></span>
                 <span><input name="autoeq-to" type="number" min="20" max="20000" step="1" value="20000"></input></span>
+                <p></p>
                 <span>Q Range</span>
                 <span><input name="q-from" type="number" min="0.3333" max="33.3333" step="1" value="0.5"></input></span>
                 <span><input name="q-to" type="number" min="0.3333" max="33.3333" step="1" value="2"></input></span>
+                <p></p>
                 <span>Q Step</span>
                 <span><select name="q-step"><option value="0.1">0.1</option><option value="0.01">0.01</option><option value="0.001">0.001</option><option value="0.0001">0.0001</option></select></span>
                 <span></span>
+                <p></p>
                 <span>Gain Range</span>
                 <span><input name="gain-from" type="number" min="-12" max="12" step="-12" value="0.5"></input></span>
                 <span><input name="gain-to" type="number" min="-12" max="12" step="12" value="2"></input></span>
