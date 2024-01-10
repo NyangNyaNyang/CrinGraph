@@ -223,9 +223,9 @@ doc.html(`
                             <option value="31-iso">31 band(ISO)</option>
                             <option value="custom">Custom</option>
                         </select>
-                        <div>
+                    </div>
+                    <div class="settings-col">
                             <input type="text" style="display:none; width:97%;" id="custom-bands" name="custom-bands" placeholder="Ex) 64, 250, 1000, 4000, 8000"></input>
-                        </div>
                     </div>
                     <button class="convert-to-graphic-filters">Convert To Graphic EQ</button>
                     <button class="export-graphic-filters">Export To Graphic EQ</button>
