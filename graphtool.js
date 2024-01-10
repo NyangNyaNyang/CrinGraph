@@ -173,6 +173,13 @@ doc.html(`
                     <span><input name="q" type="number" min="0.3333" max="33.3333" step="0.1" value="0"></input></span>
                 </div>
               </div>
+              <div class="filters-button">
+                <button class="add-filter">＋</button>
+                <button class="remove-filter">－</button>
+                <button class="sort-filters">Sort</button>
+                <button class="import-filters">Import</button>
+                <button class="export-filters">Export</button>
+              </div>
               <div class="settings-row">
                 <div class="settings-col">
                 <span>AutoEQ Range</span>
@@ -196,14 +203,9 @@ doc.html(`
                 </div>
               </div>
               <div class="filters-button">
-                <button class="add-filter">＋</button>
-                <button class="remove-filter">－</button>
-                <button class="sort-filters">Sort</button>
-                <button class="import-filters">Import</button>
-                <button class="export-filters">Export</button>
                 <button class="autoeq">AutoEQ</button>
                 <br>
-                <span>Additional Features</span>
+                <span class="features-title">Additional Features</span>
                 <button class="xbass">xBass</button>
                 <button class="fr-to-target">EQ To Target</button>
                 <div class="graphic-eq-settings">

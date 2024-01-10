@@ -1008,6 +1008,8 @@ div.settings-row {
 
 div.settings-col {
     display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 div.settings-row > span {
@@ -1020,6 +1022,10 @@ div.settings-row > span:nth-child(1) {
     font-size: 12px;
     line-height: 1em;
     text-align: left;
+}
+
+span.features-title {
+    color:black;
 }
 
 div.miscTools button span {
