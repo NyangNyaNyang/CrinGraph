@@ -204,7 +204,7 @@ doc.html(`
                 </div>
               </div>
               <div>
-                <div>
+                <div class="autoeq">
                     <button class="autoeq">AutoEQ</button>
                 </div>
                 <div>
