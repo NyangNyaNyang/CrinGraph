@@ -182,6 +182,7 @@ doc.html(`
                 <button class="export-filters">Export</button>
               </div>
               <div class="settings-row">
+                <h5>AutoEQ</h2>
                 <div class="settings-col">
                 <span>AutoEQ Range</span>
                 <span><input name="autoeq-from" type="number" min="20" max="20000" step="1" value="20"></input></span>
@@ -208,7 +209,7 @@ doc.html(`
                     <button class="autoeq">AutoEQ</button>
                 </div>
                 <div>
-                <span class="features-title">Additional Features</span>
+                <h5>Parametric Equalizer</h2>
                 </div>
                 <div class="settings-col">
                     <button class="xbass">xBass</button>
