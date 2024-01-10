@@ -1208,7 +1208,7 @@ div.extra-panel div.settings-row > span {
 }
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input,
-div.extra-panel div.settings-row > span > input {
+div.extra-panel div.settings-row > div > span > input {
     box-sizing: border-box;
     width: 100%;
     padding: 6px 10px;
@@ -1227,6 +1227,8 @@ div.extra-panel div.settings-row > span > input {
 
 span:has(input[name="freq"]),
 span:has(input[name="gain"]),
+span:has(input[name="gain-to"]):after,
+span:has(input[name="q-to"]):after,
 span:has(input[name="autoeq-to"]),
 span:has(input[name="tone-generator-to"]) {
     position: relative;
@@ -1234,6 +1236,8 @@ span:has(input[name="tone-generator-to"]) {
 
 span:has(input[name="freq"]):after,
 span:has(input[name="gain"]):after,
+span:has(input[name="gain-to"]):after,
+span:has(input[name="q-to"]):after,
 span:has(input[name="autoeq-to"]):after,
 span:has(input[name="tone-generator-to"]):after {
     position: absolute;
@@ -1255,8 +1259,13 @@ span:has(input[name="tone-generator-to"]):after {
     pointer-events: none;
 }
 
-span:has(input[name="gain"]):after {
+span:has(input[name="gain"]):after,
+span:has(input[name="gain-to"]):after {
     content: 'dB';
+}
+
+span:has(input[name="q-to"]):after {
+    content: '';
 }
 
 div.filters-header {
