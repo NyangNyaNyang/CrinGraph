@@ -177,6 +177,7 @@ doc.html(`
                 <button class="add-filter">＋</button>
                 <button class="remove-filter">－</button>
                 <button class="sort-filters">Sort</button>
+                <button class="reset">Reset Filters</button>
                 <button class="import-filters">Import</button>
                 <button class="export-filters">Export</button>
               </div>
@@ -203,25 +204,28 @@ doc.html(`
                 </div>
               </div>
               <div class="filters-button">
-                <button class="autoeq">AutoEQ</button>
-                <br>
-                <span class="features-title">Additional Features</span>
-                <button class="xbass">xBass</button>
-                <button class="fr-to-target">EQ To Target</button>
-                <div class="graphic-eq-settings">
-                    <span>Graphic EQ Band Settings</span>
-                    <select name="band-setting" id="band-setting">
-                        <option value="10-iso" selected>10 band(ISO)</option>
-                        <option value="15-iso">15 band(ISO)</option>
-                        <option value="31-iso">31 band(ISO)</option>
-                        <option value="custom">Custom</option>
-                    </select>
-                    <input type="text" style="display:none; width:97%;" id="custom-bands" name="custom-bands" placeholder="Ex) 64, 250, 1000, 4000, 8000"></input>
+                <div class="settings-col">
+                    <button class="autoeq">AutoEQ</button>
                 </div>
-                <button class="convert-to-graphic-filters">Convert To Graphic EQ</button>
-                <button class="export-graphic-filters">Export To Graphic EQ</button>
-                <br>
-                <button class="reset">Reset Filters</button>
+                <span class="features-title">Additional Features</span>
+                <div class="settings-col">
+                    <button class="xbass">xBass</button>
+                    <button class="fr-to-target">EQ To Target</button>
+                </div>
+                <div class="settings-col">
+                    <div class="graphic-eq-settings">
+                        <span>Graphic EQ Band Settings</span>
+                        <select name="band-setting" id="band-setting">
+                            <option value="10-iso" selected>10 band(ISO)</option>
+                            <option value="15-iso">15 band(ISO)</option>
+                            <option value="31-iso">31 band(ISO)</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <input type="text" style="display:none; width:97%;" id="custom-bands" name="custom-bands" placeholder="Ex) 64, 250, 1000, 4000, 8000"></input>
+                    </div>
+                    <button class="convert-to-graphic-filters">Convert To Graphic EQ</button>
+                    <button class="export-graphic-filters">Export To Graphic EQ</button>
+                </div>
                 <button class="readme">Readme</button>
               </div>
               <a style="display: none" id="file-filters-export"></a>
