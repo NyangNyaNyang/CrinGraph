@@ -1215,6 +1215,10 @@ div.extra-panel div.settings-row > span {
     display: inline-block;
 }
 
+button.autoeq {
+    display: flex;
+}
+
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input,
 div.extra-panel div.settings-row > div > span > input {
     box-sizing: border-box;
