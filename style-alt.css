@@ -1217,6 +1217,8 @@ div.extra-panel div.settings-row > span {
 
 button.autoeq {
     display: flex;
+    flex-direction: column;
+    flex: auto;
 }
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input,
