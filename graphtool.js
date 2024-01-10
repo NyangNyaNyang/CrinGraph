@@ -223,7 +223,7 @@ doc.html(`
                             <option value="31-iso">31 band(ISO)</option>
                             <option value="custom">Custom</option>
                         </select>
-                        <div class="settings-col">
+                        <div>
                             <input type="text" style="display:none; width:97%;" id="custom-bands" name="custom-bands" placeholder="Ex) 64, 250, 1000, 4000, 8000"></input>
                         </div>
                     </div>
