@@ -1150,7 +1150,7 @@ div.extra-panel select {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-
+ 
 div.extra-panel select {
   background-image:
     linear-gradient(45deg, transparent 50%, var(--background-color-contrast-more) 50%),
@@ -1215,10 +1215,12 @@ div.extra-panel div.settings-row > span {
     display: inline-block;
 }
 
+div.autoeq {
+    display: flex;
+}
+
 button.autoeq {
     display: flex;
-    flex-direction: column;
-    flex: auto;
 }
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input,
