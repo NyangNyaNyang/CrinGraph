@@ -960,7 +960,6 @@ div.filters-button {
     gap: 0 4px;
 }
 
-div.extra-panel button.sort-filters,
 div.extra-panel button.readme {
     flex: calc(50% - 2px) 0 0;
     border-color: var(--background-color-contrast) !important;

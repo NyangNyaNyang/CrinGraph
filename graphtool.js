@@ -207,7 +207,9 @@ doc.html(`
                 <div class="settings-col">
                     <button class="autoeq">AutoEQ</button>
                 </div>
+                <div>
                 <span class="features-title">Additional Features</span>
+                </div>
                 <div class="settings-col">
                     <button class="xbass">xBass</button>
                     <button class="fr-to-target">EQ To Target</button>
