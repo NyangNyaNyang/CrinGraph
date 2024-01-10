@@ -1002,7 +1002,6 @@ button.export-filters:after {
 }
 
 div.settings-row {
-    display: flex;
     align-items: center;
     gap: 4px;
 }
