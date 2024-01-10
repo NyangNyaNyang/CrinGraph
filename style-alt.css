@@ -934,6 +934,7 @@ div.miscTools button,
 div.extra-panel button {
     order: 1;
     
+    flex: auto 1 1;
     padding: 11px 8px;
     margin: 0;
     
@@ -951,6 +952,71 @@ div.extra-panel button {
     white-space: nowrap;
     cursor: pointer;
     outline: none;
+}
+
+div.filters-button {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 4px;
+}
+
+div.extra-panel button.sort-filters,
+div.extra-panel button.readme {
+    flex: calc(50% - 2px) 0 0;
+    border-color: var(--background-color-contrast) !important;
+}
+
+div.extra-panel button.import-filters,
+div.extra-panel button.export-filters {
+    position: relative;
+    
+    flex: 100% 0 0;
+}
+
+button.export-graphic-filters {
+    border-color: var(--background-color-contrast) !important;
+}
+
+button.export-filters:after {
+    content: '';
+    
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    width: 34px;
+    height: 34px;
+    background-color: var(--background-color-contrast-more);
+    pointer-events: none;
+    
+    mask: var(--icon-download);
+    -webkit-mask: var(--icon-download);
+    mask-size: 20px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: 20px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+div.settings-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+div.settings-row > span {
+    flex: calc(25% - 4px) 0 0;
+}
+
+div.settings-row > span:nth-child(1) {
+    flex: auto 1 1;
+    
+    font-size: 12px;
+    line-height: 1em;
+    text-align: left;
 }
 
 div.miscTools button span {
@@ -1020,12 +1086,80 @@ div.extra-panel > div {
 }
 
 div.extra-panel h5 {
-    margin: 0 0 1em 0;
+    margin: 16px 0 8px 0;
+    
+    font-size: 14px;
+    line-height: 1em;
     color: var(--accent-color-contrast);
+}
+
+div.extra-upload {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.extra-upload h5 {
+    flex: 100% 0 0;
+}
+
+div.extra-upload button {
+    flex: calc(50% - 2px) 1 1;
+}
+
+div.extra-upload button + button {
+    margin-left: 4px;
+}
+
+div.extra-upload span {
+    order: 2;
+    flex: 100% 0 0;
 }
 
 div.extra-panel span {
     color: var(--background-color-contrast-more);
+}
+
+div.extra-panel select {
+    position: relative;
+    
+    padding: 10px 0;
+    margin: 0;
+    
+    background-color: transparent;
+    border: none;
+    
+    color: var(--font-color-primary);
+    font-family: var(--font-family-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    
+    cursor: pointer;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+div.extra-panel select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--background-color-contrast-more) 50%),
+    linear-gradient(135deg, var(--background-color-contrast-more) 50%, transparent 50%);
+  background-position:
+    calc(100% - 5px) calc(1em + 2px),
+    calc(100% - 0px) calc(1em + 2px);
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+
+div.extra-panel select[name="phone"] {
+  background-position:
+    calc(100% - 14px) calc(1em + 3px),
+    calc(100% - 9px) calc(1em + 3px);
 }
 
 div.extra-panel > div.extra-eq > div.select-eq-phone,
@@ -1035,13 +1169,19 @@ div.extra-panel div.settings-row {
 }
 
 div.extra-panel > div.extra-eq > div.select-eq-phone > select {
-    width: 99%;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    
+    border: 1px solid var(--background-color-contrast-more);
+    border-radius: 6px;
 }
 
 div.extra-panel > div.extra-eq > div.filters-header > span,
 div.extra-panel > div.extra-eq > div.filters > div.filter > span {
-    width: 24%;
-    display: inline-block;
+    flex: 25% 1 1;
+    display: flex;
+    align-items: center;
 }
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input[type='checkbox'] {
@@ -1049,6 +1189,13 @@ div.extra-panel > div.extra-eq > div.filters > div.filter > span > input[type='c
     margin: 0;
     -webkit-appearance: checkbox;
     appearance: checkbox;
+    
+    accent-color: var(--background-color-contrast);
+    
+    cursor: pointer;
+}
+
+div.extra-panel > div.extra-eq > div.filters > div.filter > span > input[type='checkbox']:checked {
 }
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > select {
@@ -1062,7 +1209,69 @@ div.extra-panel div.settings-row > span {
 
 div.extra-panel > div.extra-eq > div.filters > div.filter > span > input,
 div.extra-panel div.settings-row > span > input {
-    width: 90%;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px 10px;
+    
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast);
+    border-radius: 6px;
+    
+    color: var(--font-color-inputs);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 12px;
+    
+    outline: none;
+}
+
+span:has(input[name="freq"]),
+span:has(input[name="gain"]),
+span:has(input[name="autoeq-to"]),
+span:has(input[name="tone-generator-to"]) {
+    position: relative;
+}
+
+span:has(input[name="freq"]):after,
+span:has(input[name="gain"]):after,
+span:has(input[name="autoeq-to"]):after,
+span:has(input[name="tone-generator-to"]):after {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    
+    content: 'Hz';
+    
+    box-sizing: border-box;
+    padding: 6px 10px 6px 0;
+    
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 11px;
+    
+    pointer-events: none;
+}
+
+span:has(input[name="gain"]):after {
+    content: 'dB';
+}
+
+div.filters-header {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0;
+    
+    font-size: 12px;
+    line-height: 1em;
+}
+
+div.filter {
+    box-sizing: border-box;
+    display: flex;
+    gap: 4px;
 }
 
 div.extra-eq-overlay {
@@ -1083,9 +1292,36 @@ div.extra-panel button {
     margin-bottom: 4px !important;
 }
 
+div.extra-panel div:has(> button.play) {
+    display: flex;
+    align-items: center;
+    
+    margin: 8px 0 0 0;
+}
+
+div.extra-panel button.play {
+    order: 0;
+    flex: calc(50% - 2px) 0 0;
+}
+
+div.extra-panel button.play + span {
+    flex: auto 1 1;
+    margin: 0 0 0 10px;
+    
+    font-size: 12px;
+    line-height: 1em;
+}
+
 div.extra-panel > div.extra-tone-generator input[name='tone-generator-freq'] {
+    box-sizing: border-box;
     width: 100%;
-    border: 1px solid var(--accent-color-contrast);
+    
+    background-color: var(--background-color-inputs);
+    border-radius: 100px;
+    
+    accent-color: var(--accent-color-contrast);
+    
+    cursor: pointer;
     
 }
 
@@ -1278,7 +1514,7 @@ tbody.curves > tr > td.remove:after {
 
 /* Remove item */
 tbody.curves > tr > td.remove {
-    order: 6;
+    order: 7;
     
     margin: 0 16px 0 6px;
     
@@ -1316,6 +1552,18 @@ tbody.curves > tr > td.button-pin:after {
 tbody.curves > tr > td.button.hideIcon:after {
     mask: var(--icon-hide);
     -webkit-mask: var(--icon-hide);
+    
+    mask-size: 20px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-size: 20px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+tbody.curves > tr > td.button.button-export:after {
+    mask: var(--icon-download);
+    -webkit-mask: var(--icon-download);
     
     mask-size: 20px;
     mask-repeat: no-repeat;
@@ -1363,6 +1611,23 @@ tbody.curves > tr > td.button-baseline:before {
 
 tbody.curves > tr > td.button-baseline:after {
     background-color: var(--font-color-primary);
+}
+
+/* Download */
+tbody.curves > tr > td.button-export {
+    position: relative;
+    
+    background-color: transparent;
+    
+    order: 6;
+}
+
+tbody.curves > tr > td.button-export:before {
+    background-color: var(--background-color);
+}
+
+tbody.curves > tr > td.button-export:after {
+    background-color: var(--background-color-contrast-more);
 }
 
 /* Hide */
@@ -1576,167 +1841,26 @@ tbody.curves > tr > td.item-line span.variantPopout[style*="display"]:after {
     display: none;
 }
 
-/* Variant ordering; pretty verbose because of DOM ordering, works up to 10 variants */
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(1) {
-    order: 1;
+/* Styles for variantName + variantPopout layout */
+div.variant-names {
+    flex: auto 1 1;
 }
 
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(2) {
-    order: 3;
+div.variant-popouts {
+    flex: 36px 0 0;
+    padding: 7px 0 0 0;
 }
 
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(3) {
-    order: 5;
+span.variantPopout {
+    margin: 0 0 14px 0;
+    display: flex !important;
 }
 
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(4) {
-    order: 7;
+span.variantPopout[style*="display: none;"] {
+    opacity: 0.0;
 }
 
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(5) {
-    order: 9;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(6) {
-    order: 11;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(7) {
-    order: 13;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(8) {
-    order: 15;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(9) {
-    order: 17;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(10) {
-    order: 19;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(11) {
-    order: 21;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(12) {
-    order: 23;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(13) {
-    order: 25;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(14) {
-    order: 27;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(15) {
-    order: 29;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(16) {
-    order: 31;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(17) {
-    order: 33;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(18) {
-    order: 35;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(19) {
-    order: 37;
-}
-
-tbody.curves > tr > td.item-line div.variantName:nth-of-type(20) {
-    order: 39;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(1) {
-    order: 2;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(2) {
-    order: 4;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(3) {
-    order: 6;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(4) {
-    order: 8;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(5) {
-    order: 10;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(6) {
-    order: 12;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(7) {
-    order: 14;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(8) {
-    order: 16;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(9) {
-    order: 18;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(10) {
-    order: 20;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(11) {
-    order: 22;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(12) {
-    order: 24;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(13) {
-    order: 26;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(14) {
-    order: 28;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(15) {
-    order: 30;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(16) {
-    order: 32;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(17) {
-    order: 34;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(18) {
-    order: 36;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(19) {
-    order: 38;
-}
-
-tbody.curves > tr > td.item-line span.variantPopout:nth-of-type(20) {
-    order: 40;
-}
-
+/* -- */
 tbody.curves > tr > td.item-line div.variants {
     position: relative;
     
@@ -2029,6 +2153,8 @@ div.scroll {
     
     overflow-y: auto;
     overflow-x: hidden;
+    
+    scroll-behavior: smooth;
 }
 
 /* List selected styles */
@@ -2076,7 +2202,7 @@ div.scroll > div {
     position: relative;
     
     box-sizing: border-box;
-    height: 36px;
+    min-height: 36px;
     padding: 11px 12px;
     overflow: hidden;
     
@@ -2943,6 +3069,7 @@ Responsive styles *****/
     
     tbody.curves > tr > td.hideIcon.selected:before,
     tbody.curves > tr > td.button-pin:before,
+    tbody.curves > tr > td.button-export:before,
     tbody.curves > tr > td.remove:before {
         border: 1px solid var(--background-color);
         background-color: var(--background-color-contrast);
@@ -3148,29 +3275,10 @@ Responsive styles *****/
     /*****
     Alt header mobile *****/
 
-    header.header:before {
-        position: absolute;
-        top: 6px;
-        left: 6px;
-
-        content: '';
-        box-sizing: border-box;
-        display: block;
-        width: 36px;
-        height: 36px;
-
-        background-color: var(--background-color);
-        border: 1px solid var(--background-color-contrast-more);
-        border-radius: 6px;
-        cursor: pointer;
-        display: none;
-    }
-
     button.header-button {
-        content: '';
         box-sizing: border-box;
         display: block;
-        width: 36px;
+        flex: 36px 0 0;
         height: 36px;
         margin: 0 0 0 6px;
 
@@ -3299,6 +3407,7 @@ Responsive styles *****/
         display: flex;
         
         flex: 50% 1 1;
+        height: calc(100% - 52px);
     }
     
     div.scroll {
