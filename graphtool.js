@@ -203,8 +203,8 @@ doc.html(`
                 <span><input name="gain-to" type="number" min="-12" max="12" step="12" value="2"></input></span>
                 </div>
               </div>
-              <div class="filters-button">
-                <div class="settings-col">
+              <div>
+                <div>
                     <button class="autoeq">AutoEQ</button>
                 </div>
                 <div>
@@ -214,8 +214,8 @@ doc.html(`
                     <button class="xbass">xBass</button>
                     <button class="fr-to-target">EQ To Target</button>
                 </div>
-                <div class="settings-col">
-                    <div class="graphic-eq-settings">
+                <div>
+                    <div class="settings-col">
                         <span>Graphic EQ Band Settings</span>
                         <select name="band-setting" id="band-setting">
                             <option value="10-iso" selected>10 band(ISO)</option>
