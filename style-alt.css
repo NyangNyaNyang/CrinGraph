@@ -1006,6 +1006,10 @@ div.settings-row {
     gap: 4px;
 }
 
+div.settings-col {
+    display: flex;
+}
+
 div.settings-row > span {
     flex: calc(25% - 4px) 0 0;
 }
