@@ -2949,6 +2949,7 @@ function addExtra() {
         }
         updateFilterElements();
         applyEQ();
+        normalizePhone(phoneObj);
     });
     //Show custom bands input bar when custom option is selected
     document.getElementById("band-setting").addEventListener("change", () => {
