@@ -2002,6 +2002,31 @@ tbody.curves > tr > td.levels input {
     text-align: center;
 }
 
+tbody.curves > tr > td.loudness {
+    order: 2;
+    
+    padding: 0 0 0 16px;
+}
+
+tbody.curves > tr > td.loudness input {
+    box-sizing: border-box;
+    width: 70px;
+    height: 36px;
+    padding: 11px 6px 11px 0;
+    
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast-more);
+    border-radius: 6px;
+    outline: none;
+    
+    color: var(--font-color-inputs);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 /* List lock controls */
 tr.addPhone {
     display: none;
