@@ -1978,7 +1978,7 @@ tbody.curves > tr > td.channels text {
 
 /* Shift graph input / Levels */
 tbody.curves > tr > td.levels {
-    order: 2;
+    order: 3;
     
     padding: 0 0 0 16px;
 }
