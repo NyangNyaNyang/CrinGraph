@@ -2027,7 +2027,7 @@ tbody.curves > tr > td.loudness input {
     text-align: center;
 }
 
-tbody.curves > tr > td.loudness input:after {
+tbody.curves > tr > td.loudness:after {
     content: 'dB';
 }
 
