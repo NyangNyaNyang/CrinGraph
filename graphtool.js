@@ -2677,7 +2677,6 @@ function addExtra() {
     let applyEQExec = () => {
         // Create and show phone with eq applied
         let activeElem = document.activeElement;
-        if(activeElem.eqParent) activeElem = activeElem.eqParent;
         let phoneSelected = eqPhoneSelect.value;
         let filters = elemToFilters();
         if (filters.length && !phoneSelected) {
