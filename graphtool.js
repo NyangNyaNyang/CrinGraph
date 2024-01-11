@@ -2929,6 +2929,7 @@ function addExtra() {
                 qFactors = new Array(10).fill(1.41);
         }
         let graphicEQ = Equalizer.as_graphic_eq(filters);
+        console.log(graphicEQ);
         eqBands = 1;
         updateFilterElements();
         let node = filtersContainer.querySelector("div.filter");
