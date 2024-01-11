@@ -2027,6 +2027,10 @@ tbody.curves > tr > td.loudness input {
     text-align: center;
 }
 
+tbody.curves > tr > td.loudness input:after {
+    content: 'dB';
+}
+
 /* List lock controls */
 tr.addPhone {
     display: none;

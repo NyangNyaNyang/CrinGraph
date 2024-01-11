@@ -209,7 +209,7 @@ doc.html(`
                     <button class="autoeq">AutoEQ</button>
                 </div>
                 <div>
-                <h5>Parametric Equalizer</h2>
+                <h5>Additional Features</h2>
                 </div>
                 <div class="settings-col">
                     <button class="xbass">xBass</button>
