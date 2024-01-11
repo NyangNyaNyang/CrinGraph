@@ -2677,6 +2677,7 @@ function addExtra() {
     let applyEQExec = () => {
         // Create and show phone with eq applied
         let activeElem = document.activeElement;
+        if(activeElem.eqParent) activeElem = activeElem.eqParent;
         let phoneSelected = eqPhoneSelect.value;
         let filters = elemToFilters();
         if (filters.length && !phoneSelected) {
@@ -2928,7 +2929,7 @@ function addExtra() {
         }
         let graphicEQ = Equalizer.as_graphic_eq(filters);
         eqBands = 1;
-        //updateFilterElements();
+        updateFilterElements();
         let node = filtersContainer.querySelector("div.filter");
         eqBands = qFactors.length;
         node.querySelector("input[name='enabled']").value = "true";
