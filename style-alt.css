@@ -1978,8 +1978,7 @@ tbody.curves > tr > td.channels text {
 
 /* Shift graph input / Levels */
 tbody.curves > tr > td.levels {
-    margin-left: auto;
-    order: 3;
+    order: 2;
     
     padding: 0 0 0 16px;
 }
@@ -2004,7 +2003,8 @@ tbody.curves > tr > td.levels input {
 }
 
 tbody.curves > tr > td.loudness {
-    order: 2;
+    margin-left : auto;
+    order: 3;
     
     padding: 0 0 0 16px;
 }
