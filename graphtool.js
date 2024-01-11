@@ -2928,7 +2928,7 @@ function addExtra() {
         }
         let graphicEQ = Equalizer.as_graphic_eq(filters);
         eqBands = 1;
-        updateFilterElements();
+        //updateFilterElements();
         let node = filtersContainer.querySelector("div.filter");
         eqBands = qFactors.length;
         node.querySelector("input[name='enabled']").value = "true";
