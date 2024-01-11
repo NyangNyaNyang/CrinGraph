@@ -1235,6 +1235,11 @@ function updatePhoneTable() {
         .attrs({ type: "number", step: "any", value: 0 })
         .property("value", p => p.offset)
         .on("change input", function (p) { setOffset(p, +this.value); });
+    td().attr("class", "loudness").append("input")
+        .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
+        .on("change", function(p) {
+            loudness_equalizer(p, this.value);
+        })
     td().attr("class", "button button-baseline")
         .html("<svg viewBox='-170 -120 340 240'><use xlink:href='#baseline-icon'></use></svg>")
         .on("click", p => setBaseline(p === baseline.p ? baseline0
@@ -1282,11 +1287,6 @@ function updatePhoneTable() {
                     d: "M265 110V25q0 -10 -10 -10H105q-24 0 -48 20l-24 20q-24 20 -2 40l18 15q24 20 42 20h100"
                 });
         });
-    td().attr("class", "loudness").append("input")
-        .attrs({type: "number", step: 1, value: 85, min: 30, max: 85})
-        .on("change", function(p) {
-            loudness_equalizer(p, this.value);
-        })
 }
 
 function addKey(s) {
