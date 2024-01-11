@@ -1350,6 +1350,24 @@ div.extra-panel > div.extra-tone-generator input[name='tone-generator-freq'] {
     
 }
 
+div.settings-col > input[name='custom-bands'] {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    
+    content: 'Hz';
+    
+    box-sizing: border-box;
+    padding: 6px 10px 6px 0;
+    
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 11px;
+}
+
 /*****
 Targets styles *****/
 
