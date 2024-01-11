@@ -209,8 +209,10 @@ Equalizer = (function() {
             return [f, avg];
         });
         // Normalize (apply preamp)
+        /*
         let maxGain = resultFR.reduce((a, b) => a > b[1] ? a : b[1], -Infinity);
         resultFR = resultFR.map(([f, v]) => [f, v-maxGain]);
+        */
         return resultFR;
     };
 
