@@ -2870,10 +2870,12 @@ function addExtra() {
         exportElem.click();
     });
     document.querySelector("div.extra-eq button.convert-to-graphic-filters").addEventListener("click", () => {
+        /*
         if(isGraphicEQMode == true) {
             alert("이미 그래픽 EQ로 변환됨! 초기화 버튼을 누르거나 다시 autoEQ를 돌리거나 필터를 하나 추가하거나 제거한 후 다시 시도하세요.");
             return;
         }
+        */
         isGraphicEQMode = true;
         let phoneSelected = eqPhoneSelect.value;
         let phoneObj = phoneSelected && activePhones.filter(
