@@ -1352,8 +1352,6 @@ div.extra-panel > div.extra-tone-generator input[name='tone-generator-freq'] {
 
 div.settings-col > input[name='custom-bands'] {
     position: relative;
-    top: 1px;
-    right: 1px;
     
     content: 'Hz';
     
