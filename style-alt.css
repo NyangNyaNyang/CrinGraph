@@ -2003,8 +2003,6 @@ tbody.curves > tr > td.levels input {
 }
 
 tbody.curves > tr > td.loudness {
-    margin-left: auto;
-    
     order: 2;
     
     padding: 0 0 0 16px;
@@ -3431,13 +3429,6 @@ Responsive styles *****/
         padding-right: 0px !important;
     }
     
-    tbody.curves > tr > td.channels {
-        margin-right: auto;
-    }
-    
-    tbody.curves > tr > td.levels {
-        margin-left: auto;
-    }
     
     tbody.curves > tr > td.button-baseline {
     }
