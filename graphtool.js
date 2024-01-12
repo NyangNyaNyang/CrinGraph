@@ -1776,16 +1776,7 @@ function tilting(p, t, b) {
         af[i][1] += t * Math.log2(p[i][0] / c);
     }
 
-    return Equalizer.apply(af, b ? [
-            {
-              disabled: false,
-              type: 'LSQ',
-              freq: 105,
-              q: 0.71,
-              gain: b,
-              adjust: 'boost',
-            },
-          ]:[]);
+    return af;
 }
 
 function iso226(phon, targetFreq) {
