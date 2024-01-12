@@ -193,6 +193,7 @@ Equalizer = (function() {
         let coeffs = filters_to_coeffs(filters, sampleRate);
         let gains = calc_gains(rawFS, coeffs, sampleRate);
         let rawFR = rawFS.map((f, i) => [f, gains[i]]);
+        console.log(rawFR);
         // Interpolate and smoothing with moving average
         let i = 0;
         let resultFR = fs.map((f, j) => {
