@@ -760,6 +760,7 @@ function smoothPhone(p) {
         p.smooth = smooth_level;
         setCurves(p);
     }
+    console.log(p);
 }
 
 doc.select("#smooth-level").on("change input", function () {
