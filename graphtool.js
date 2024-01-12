@@ -1769,16 +1769,11 @@ function updateTilt() {
 
 function tilting(p, t, b) {
     var af = new Array(p.length);
+    let c = 20.0 * Math.sqrt(20000.0/20.0);
 
     for (var i = 0; i < p.length; i++) {
         af[i] = [...p[i]];
-
-        // 200hz 이상 대역만  틸트  적용 
-        if (af[i][0] >= 200) {
-            af[i][1] += t * (Math.LOG2E * Math.log(p[i][0]) - Math.log2(200));
-            // const frequencyFactor = Math.pow(2, (Math.log2(frequency) - Math.log2(200)) * dbPerOctave / 10);
-            // const tiltedDbSPL = dbSPL + 10 * Math.log10(frequencyFactor);
-        }
+        af[i][1] += t * Math.log2(p[i][0] / c);
     }
 
     return Equalizer.apply(af, b ? [
