@@ -190,9 +190,12 @@ Equalizer = (function() {
 
     let as_graphic_eq = function (filters, sampleRate) {
         let rawFS = config.GraphicEQRawFrequences, fs = config.GraphicEQFrequences;
+        console.log(fs);
         let coeffs = filters_to_coeffs(filters, sampleRate);
         let gains = calc_gains(rawFS, coeffs, sampleRate);
         let rawFR = rawFS.map((f, i) => [f, gains[i]]);
+        console.log(coeffs);
+        console.log(gains);
         console.log(rawFR);
         // Interpolate and smoothing with moving average
         let i = 0;
